@@ -1,0 +1,3 @@
+Extract explicit or clearly implied deadlines from the supplied ACTIFY input.
+Normalize dates/times when the reference date is known.
+Never invent a deadline. If no deadline is present, return null.
