@@ -1,0 +1,11 @@
+{
+  "title": "string",
+  "description": "string|null",
+  "deadline": "ISO-8601 datetime|null",
+  "priority": "low|medium|high",
+  "estimated_minutes": "integer",
+  "category": "string",
+  "dependencies": ["string"],
+  "source": "camera|voice|screenshot|document|text",
+  "confidence": "number"
+}
