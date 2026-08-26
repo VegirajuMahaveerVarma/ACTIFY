@@ -1,0 +1,2 @@
+Classify the extracted ACTIFY task into a practical category such as college, work, project, personal, career, finance, health, or general.
+Use only evidence present in the input. Return one category and a confidence score.
