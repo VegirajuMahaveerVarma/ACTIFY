@@ -2,53 +2,79 @@
 
 **AI-Powered Action Intelligence Platform**
 
-> Turn Information into Action.
+> Turn information into action.
 
-ACTIFY is a phone-first AI productivity application that converts scattered information—camera captures, voice, screenshots, text, and documents—into prioritized tasks, practical schedules, and a clear **Next Best Action**.
+ACTIFY is a phone-first productivity app designed to turn scattered information—voice, notes, screenshots, and documents—into clear tasks, priorities, and a practical next step.
 
-## Core Loop
+## Core loop
 
 **CAPTURE → UNDERSTAND → PRIORITIZE → PLAN → ACT → ADAPT**
 
-## Repository Structure
+## Repository structure
 
 ```text
 ACTIFY/
 ├── mobile/       # Flutter mobile application
-├── backend/      # FastAPI backend and application intelligence
+├── backend/      # FastAPI API and application intelligence
 ├── ai/           # Prompt and structured-output definitions
 ├── database/     # Supabase/PostgreSQL schema and migrations
 ├── docs/         # Architecture, API and demo documentation
-└── tests/        # Mobile, backend and AI tests
+└── tests/        # Backend and AI tests
 ```
 
-## MVP Focus
+## Current MVP status
 
-1. Camera-to-Action
-2. Voice-to-Action
-3. Screenshot/Text-to-Action
-4. AI task and deadline extraction
-5. Intelligent priority scoring
-6. Scheduling
-7. Next Best Action
-8. Dynamic replanning
-9. AI Assistant
+- [x] Interactive task dashboard with open/completed counts
+- [x] Next-action card and task completion
+- [x] Manual task capture
+- [x] Speech-to-text capture (device support and permissions required)
+- [x] Camera capture with a manual description fallback
+- [x] Deterministic backend priority scoring and task status updates
+- [x] Optional Gemini task extraction endpoint
+- [ ] OCR-based extraction from captured images
+- [ ] Durable task storage and authenticated per-user sync
+- [ ] Full calendar-aware scheduling and replanning
+
+Tasks created in the current Flutter UI are session-only. Camera capture currently does not run OCR; the capture screen explains this and lets the user describe the image manually.
+
+## Run locally
+
+### Mobile
+
+```bash
+cd mobile
+flutter pub get
+flutter analyze
+flutter test
+flutter run
+```
+
+### Backend
+
+```bash
+cd backend
+python -m venv .venv
+# Activate the virtual environment, then:
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+The backend health check is available at `GET /health`. Interactive API documentation is available at `/docs`.
+
+Set `GEMINI_API_KEY` in the backend environment to enable Gemini extraction; without a key, the extractor returns a clearly identified local fallback result.
 
 ## Technology
 
 - Flutter + Dart
-- Gemini API
-- Google ML Kit / OCR
-- Android Speech Recognition
-- Python + FastAPI
-- Supabase PostgreSQL + Auth + Storage
-- Firebase Cloud Messaging
+- Python + FastAPI + Pydantic
+- Gemini API (optional)
+- Supabase/PostgreSQL schema prepared for persistence
+- Android speech recognition and image capture
 
-## Architecture Principle
+## Architecture principle
 
-Gemini is responsible for language understanding and structured extraction. Deterministic application logic handles priority scoring, scheduling, conflict detection, task state, and replanning.
+AI is used for language understanding and structured extraction. Deterministic application logic owns priority scoring, task status, and scheduling decisions so those behaviors remain testable and predictable.
 
 ## Team
 
 **Quantum Coders**
-
