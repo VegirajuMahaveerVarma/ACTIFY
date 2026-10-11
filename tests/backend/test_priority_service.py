@@ -1,4 +1,7 @@
-from backend.app.services.priority_service import calculate_priority
+try:
+    from backend.app.services.priority_service import calculate_priority
+except ModuleNotFoundError:
+    from app.services.priority_service import calculate_priority
 
 
 def test_priority_score_is_bounded():
