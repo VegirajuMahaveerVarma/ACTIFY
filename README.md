@@ -43,6 +43,7 @@ Tasks created in the current Flutter UI are session-only. Camera capture current
 
 ```bash
 cd mobile
+flutter create --platforms android . # only if mobile/android/ is missing
 flutter pub get
 flutter analyze
 flutter test
