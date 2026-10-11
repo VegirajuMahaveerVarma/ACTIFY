@@ -30,15 +30,6 @@ class ActifyTheme {
           color: Colors.white,
         ),
       ),
-      cardTheme: CardTheme(
-        color: surface,
-        elevation: 0,
-        margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Color(0xFF252B35)),
-        ),
-      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: surface,
