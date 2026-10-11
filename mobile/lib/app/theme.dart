@@ -30,7 +30,7 @@ class ActifyTheme {
           color: Colors.white,
         ),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: surface,
         elevation: 0,
         margin: EdgeInsets.zero,
