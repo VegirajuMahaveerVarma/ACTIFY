@@ -93,9 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: const EdgeInsets.only(right: 18),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: ActifyTheme.accent.withValues(alpha: 0.12),
+              color: ActifyTheme.accent.withOpacity(0.12),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: ActifyTheme.accent.withValues(alpha: 0.35)),
+              border: Border.all(color: ActifyTheme.accent.withOpacity(0.35)),
             ),
             child: const Row(
               children: [
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   end: Alignment.bottomRight,
                   colors: [Color(0xFF25251D), Color(0xFF151A20), Color(0xFF11151B)],
                 ),
-                border: Border.all(color: ActifyTheme.accent.withValues(alpha: 0.35)),
+                border: Border.all(color: ActifyTheme.accent.withOpacity(0.35)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,7 +298,7 @@ class _TaskRow extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            decoration: BoxDecoration(color: priorityColor.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: priorityColor.withOpacity(0.12), borderRadius: BorderRadius.circular(8)),
             child: Text(task.priority.name, style: TextStyle(color: priorityColor, fontSize: 11, fontWeight: FontWeight.w800)),
           ),
         ],
