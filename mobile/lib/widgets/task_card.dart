@@ -22,7 +22,7 @@ class TaskCard extends StatelessWidget {
               width: 42,
               height: 42,
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.12),
+                color: color.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(13),
               ),
               child: Icon(Icons.task_alt_rounded, color: color),
