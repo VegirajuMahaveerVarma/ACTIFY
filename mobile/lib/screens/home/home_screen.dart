@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final byPriority =
               priorityOrder[a.priority]!.compareTo(priorityOrder[b.priority]!);
           if (byPriority != 0) return byPriority;
+          if (a.deadline == null && b.deadline == null) return 0;
           if (a.deadline == null) return 1;
           if (b.deadline == null) return -1;
           return a.deadline!.compareTo(b.deadline!);
