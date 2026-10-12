@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../app/theme.dart';
 import '../models/task.dart';
 
 class TaskCard extends StatelessWidget {
@@ -8,10 +9,30 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-        title: Text(task.title),
-        subtitle: Text('${task.estimatedMinutes} min • ${task.priority.name} priority'),
-        trailing: const Icon(Icons.chevron_right),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+          leading: Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(
+              color: ActifyTheme.neon.withValues(alpha: 0.09),
+              borderRadius: BorderRadius.circular(11),
+              border: Border.all(color: ActifyTheme.neon.withValues(alpha: 0.18)),
+            ),
+            child: const Icon(Icons.terminal_rounded, color: ActifyTheme.neon, size: 19),
+          ),
+          title: Text(task.title, style: const TextStyle(fontWeight: FontWeight.w700)),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Text(
+              '${task.estimatedMinutes} min  •  ${task.priority.name} priority',
+              style: const TextStyle(color: ActifyTheme.muted, fontSize: 12),
+            ),
+          ),
+          trailing: const Icon(Icons.arrow_outward_rounded, color: ActifyTheme.neon, size: 18),
+        ),
       ),
     );
   }
