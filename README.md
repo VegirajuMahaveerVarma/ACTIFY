@@ -1,20 +1,28 @@
 # ACTIFY
 
 <p align="center">
+  <img src="https://img.shields.io/badge/ACTIFY-CYBER%20INTELLIGENCE-35F2E2?style=for-the-badge&labelColor=070A12" alt="ACTIFY Cyber Intelligence">
+</p>
+
+<p align="center">
   <strong>Turn information into action.</strong><br/>
-  An AI-powered, phone-first action-intelligence project.
+  An AI-powered, phone-first action-intelligence project with a dark cyber-inspired interface.
 </p>
 
 <p align="center">
   <a href="https://github.com/VegirajuMahaveerVarma/ACTIFY/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/VegirajuMahaveerVarma/ACTIFY/actions/workflows/ci.yml/badge.svg"></a>
-  <img alt="Flutter" src="https://img.shields.io/badge/mobile-Flutter%20%2F%20Dart-02569B?logo=flutter&logoColor=white">
-  <img alt="Backend" src="https://img.shields.io/badge/backend-FastAPI-009688?logo=fastapi&logoColor=white">
-  <img alt="Status" src="https://img.shields.io/badge/status-early%20development-orange">
+  <img alt="Flutter" src="https://img.shields.io/badge/mobile-Flutter%20%2F%20Dart-35F2E2?logo=flutter&logoColor=070A12&labelColor=101827">
+  <img alt="Backend" src="https://img.shields.io/badge/backend-FastAPI-508CFF?logo=fastapi&logoColor=white&labelColor=101827">
+  <img alt="Status" src="https://img.shields.io/badge/status-early%20development-9B7CFF?labelColor=101827">
 </p>
 
 ACTIFY explores a simple idea: useful information is scattered across screenshots, voice notes, documents, and messages, while the next action is often unclear. The goal is to turn those inputs into structured tasks, sensible priorities, schedules, and a **Next Best Action**.
 
 > **Project status:** early development. The repository contains a Flutter mobile foundation, a FastAPI service, AI prompt/schema definitions, and a database schema. Not every item in the product vision is implemented or production-ready yet.
+
+## Visual direction
+
+ACTIFY uses a cyber-inspired dark UI: near-black backgrounds, deep navy surfaces, neon cyan highlights, electric blue accents, and restrained violet details. The design aims to feel like a focused personal command center—not a cluttered sci-fi prop.
 
 ## Product loop
 
@@ -30,7 +38,7 @@ ACTIFY explores a simple idea: useful information is scattered across screenshot
 
 ```text
 ACTIFY/
-├── mobile/       # Flutter app
+├── mobile/       # Flutter app and cyber-inspired UI theme
 ├── backend/      # FastAPI service
 ├── ai/           # Prompt and structured-output definitions
 ├── database/     # SQL schema
@@ -115,7 +123,7 @@ Use AI for language understanding and extraction; use deterministic application 
 - [ ] Add setup instructions and screenshots from a verified app run.
 - [ ] Validate secrets handling, API configuration, and deployment before describing the app as production-ready.
 
-Roadmap items are intentions, not claims of completed functionality.
+Roadmap items are intentions, not claims of completed functionality. The cyber styling is a UI layer; it does not indicate that ACTIFY is a cybersecurity product or that the app has undergone a security assessment.
 
 ## Contributing
 
