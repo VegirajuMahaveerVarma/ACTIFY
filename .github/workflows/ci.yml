@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, "feat/**"]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -32,6 +32,8 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r backend/requirements.txt pytest
       - name: Run backend and AI tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}/backend
         run: python -m pytest tests/backend tests/ai
 
   flutter-checks:
