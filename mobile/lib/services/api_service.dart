@@ -19,7 +19,6 @@ class ApiService {
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw Exception('AI request failed with status ${response.statusCode}');
     }
-
     final decoded = jsonDecode(response.body);
     if (decoded is! Map<String, dynamic>) {
       throw const FormatException('API returned an unexpected response');
