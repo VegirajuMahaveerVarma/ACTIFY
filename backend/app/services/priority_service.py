@@ -11,7 +11,6 @@ def _deadline_urgency(deadline: str | None) -> float:
         hours_left = (parsed - datetime.now(timezone.utc)).total_seconds() / 3600
     except (TypeError, ValueError):
         return 0.35
-
     if hours_left <= 0:
         return 1.0
     if hours_left <= 6:
@@ -33,7 +32,7 @@ def calculate_priority(
     progress: int = 0,
     dependency_count: int = 0,
 ) -> dict[str, object]:
-    """Calculate an explainable task priority score from validated task details."""
+    """Calculate an explainable priority score from validated task details."""
     importance_value = max(0, min(100, importance)) / 100
     progress_value = max(0, min(100, progress)) / 100
     effort_value = min(max(estimated_minutes, 0) / 240, 1)
@@ -50,7 +49,6 @@ def calculate_priority(
     )
     score = max(0, min(100, score))
     label = "high" if score >= 70 else "medium" if score >= 40 else "low"
-
     reasons = []
     if deadline:
         reasons.append("deadline urgency")
@@ -60,6 +58,8 @@ def calculate_priority(
         reasons.append("blocks other work")
     if progress >= 80:
         reasons.append("nearly complete")
-    reason = ", ".join(reasons) if reasons else "balanced urgency and importance"
-
-    return {"score": score, "label": label, "reason": reason}
+    return {
+        "score": score,
+        "label": label,
+        "reason": ", ".join(reasons) if reasons else "balanced urgency and importance",
+    }
