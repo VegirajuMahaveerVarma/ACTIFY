@@ -16,5 +16,8 @@ def get_schedule(
     start_time = start or datetime.now(timezone.utc)
     eligible = [task for task in _TASKS if task.get("status") != "completed"]
     plan = schedule_tasks(eligible, start_time, available_minutes)
-    next_action = plan[0] if plan else None
-    return {"schedule": plan, "next_best_action": next_action, "available_minutes": available_minutes}
+    return {
+        "schedule": plan,
+        "next_best_action": plan[0] if plan else None,
+        "available_minutes": available_minutes,
+    }
