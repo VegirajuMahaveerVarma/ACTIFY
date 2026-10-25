@@ -9,7 +9,7 @@ def replan(
     start: datetime | None = None,
     available_minutes: int = 240,
 ) -> list[dict]:
-    """Create a fresh schedule from the current task state."""
+    """Rebuild a plan from the current task state."""
     return schedule_tasks(
         tasks,
         start or datetime.now(timezone.utc),
