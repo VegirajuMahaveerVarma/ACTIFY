@@ -6,7 +6,7 @@ def schedule_tasks(
     start: datetime,
     available_minutes: int,
 ) -> list[dict]:
-    """Build a deterministic sequential plan within the available time window."""
+    """Build a deterministic sequential plan inside the available time window."""
     if available_minutes < 0:
         raise ValueError("available_minutes must be non-negative")
     if start.tzinfo is None:
@@ -23,16 +23,14 @@ def schedule_tasks(
             item.get("deadline") or "9999",
         ),
     )
-
     for task in ordered:
         if task.get("status") == "completed":
             continue
-        requested = max(1, int(task.get("estimated_minutes", 30)))
-        if requested > remaining:
+        duration = max(1, int(task.get("estimated_minutes", 30)))
+        if duration > remaining:
             continue
-        end = cursor + timedelta(minutes=requested)
+        end = cursor + timedelta(minutes=duration)
         result.append({**task, "start": cursor.isoformat(), "end": end.isoformat()})
         cursor = end
-        remaining -= requested
-
+        remaining -= duration
     return result
