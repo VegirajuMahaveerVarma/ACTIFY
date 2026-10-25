@@ -52,16 +52,14 @@ def _with_priority(payload: TaskCreate) -> dict:
         progress=payload.progress,
         dependency_count=payload.dependency_count,
     )
-    task.update(
-        {
-            "id": str(uuid4()),
-            "priority_score": score["score"],
-            "priority_label": score["label"],
-            "priority_reason": score["reason"],
-            "status": "pending",
-            "created_at": datetime.now().astimezone().isoformat(),
-        }
-    )
+    task.update({
+        "id": str(uuid4()),
+        "priority_score": score["score"],
+        "priority_label": score["label"],
+        "priority_reason": score["reason"],
+        "status": "pending",
+        "created_at": datetime.now().astimezone().isoformat(),
+    })
     return task
 
 
