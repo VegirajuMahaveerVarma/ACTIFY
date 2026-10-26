@@ -9,39 +9,55 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final priorityColor = switch (task.priority.name.toLowerCase()) {
-      'high' => const Color(0xFFFF6B8A),
-      'medium' => ActifyTheme.neonViolet,
-      _ => ActifyTheme.neonCyan,
+      'high' => ActifyTheme.danger,
+      'medium' => const Color(0xFFE5BE67),
+      _ => ActifyTheme.accent,
     };
 
     return Card(
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        title: Text(task.title, style: const TextStyle(fontWeight: FontWeight.w700)),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 9),
+        title: Text(
+          task.title,
+          style: const TextStyle(
+            color: ActifyTheme.textPrimary,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+          ),
+        ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: Row(
+          child: Wrap(
+            spacing: 10,
+            runSpacing: 6,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              const Icon(Icons.schedule, size: 14, color: ActifyTheme.textMuted),
-              const SizedBox(width: 5),
+              Icon(Icons.schedule_rounded, size: 14, color: ActifyTheme.textMuted),
               Text('${task.estimatedMinutes} min'),
-              const SizedBox(width: 12),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: priorityColor.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: priorityColor.withValues(alpha: 0.4)),
+                  color: priorityColor.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(5),
                 ),
                 child: Text(
-                  '${task.priority.name.toUpperCase()} PRIORITY',
-                  style: TextStyle(color: priorityColor, fontSize: 9, fontWeight: FontWeight.w800, letterSpacing: 0.6),
+                  '${task.priority.name.toUpperCase()}',
+                  style: TextStyle(
+                    color: priorityColor,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.5,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        trailing: const Icon(Icons.chevron_right, color: ActifyTheme.neonCyan),
+        trailing: const Icon(
+          Icons.arrow_forward_rounded,
+          size: 17,
+          color: ActifyTheme.textMuted,
+        ),
       ),
     );
   }
