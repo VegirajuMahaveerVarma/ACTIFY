@@ -14,141 +14,129 @@ class HomeScreen extends StatelessWidget {
           children: [
             _BrandMark(),
             SizedBox(width: 10),
-            Text('ACTIFY'),
+            Text('actify'),
           ],
         ),
         actions: const [
           Padding(
-            padding: EdgeInsets.only(right: 18),
-            child: _SystemStatus(),
+            padding: EdgeInsets.only(right: 20),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _StatusDot(),
+                SizedBox(width: 7),
+                Text(
+                  'READY',
+                  style: TextStyle(
+                    color: ActifyTheme.textMuted,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final horizontalPadding = constraints.maxWidth > 600 ? 32.0 : 20.0;
+            final horizontal = constraints.maxWidth > 650 ? 32.0 : 20.0;
             return SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(horizontalPadding, 14, horizontalPadding, 24),
+              padding: EdgeInsets.fromLTRB(horizontal, 20, horizontal, 28),
               child: Center(
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 760),
+                  constraints: const BoxConstraints(maxWidth: 680),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const _Eyebrow(label: 'PERSONAL ACTION INTELLIGENCE'),
-                      const SizedBox(height: 14),
                       Text(
-                        'Make your next\nmove count.',
+                        'MONDAY, YOUR WAY',
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: ActifyTheme.textMuted,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Make room\nfor what matters.',
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       const SizedBox(height: 12),
-                      Text(
-                        'Capture the noise. Find the signal. Take action.',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 26),
-                      const _MissionPanel(),
-                      const SizedBox(height: 28),
-                      const Row(
-                        children: [
-                          Expanded(
-                            child: _SectionHeading(
-                              title: 'QUICK CAPTURE',
-                              subtitle: 'Choose an input channel',
-                            ),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 420),
+                        child: Text(
+                          'Gather your tasks, find your focus, and take the next step.',
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: ActifyTheme.textMuted,
                           ),
-                          _TinyStatusDot(),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      const _FocusCard(),
+                      const SizedBox(height: 30),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Capture something',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const Icon(Icons.arrow_downward_rounded, size: 17),
                         ],
                       ),
-                      const SizedBox(height: 14),
-                      LayoutBuilder(
-                        builder: (context, innerConstraints) {
-                          final items = const [
-                            _CaptureOption(
-                              icon: Icons.document_scanner_outlined,
-                              label: 'Scan',
-                              detail: 'Documents',
-                            ),
-                            _CaptureOption(
-                              icon: Icons.graphic_eq,
-                              label: 'Voice',
-                              detail: 'Voice notes',
-                            ),
-                            _CaptureOption(
-                              icon: Icons.image_outlined,
-                              label: 'Image',
-                              detail: 'Screenshots',
-                            ),
-                          ];
-                          if (innerConstraints.maxWidth < 340) {
-                            return Column(
-                              children: [
-                                for (final item in items) ...[
-                                  item,
-                                  const SizedBox(height: 10),
-                                ],
-                              ],
-                            );
-                          }
-                          return Row(
-                            children: [
-                              for (var i = 0; i < items.length; i++) ...[
-                                if (i > 0) const SizedBox(width: 10),
-                                Expanded(child: items[i]),
-                              ],
-                            ],
-                          );
-                        },
+                      const SizedBox(height: 6),
+                      Text(
+                        'Start with what is on your mind.',
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      const SizedBox(height: 22),
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: ActifyTheme.surface.withValues(alpha: 0.74),
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: ActifyTheme.outline),
-                        ),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.lock_outline, size: 17, color: ActifyTheme.neonCyan),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'One focused workspace for your next best action.',
-                                style: TextStyle(
-                                  color: ActifyTheme.textMuted,
-                                  fontSize: 12,
-                                  height: 1.4,
-                                ),
-                              ),
-                            ),
-                            Icon(Icons.arrow_outward, size: 16, color: ActifyTheme.textMuted),
-                          ],
-                        ),
+                      const SizedBox(height: 16),
+                      const _CaptureChoice(
+                        icon: Icons.edit_note_rounded,
+                        title: 'Write a note',
+                        subtitle: 'An idea, task, or reminder',
                       ),
-                      const SizedBox(height: 24),
+                      const _CaptureChoice(
+                        icon: Icons.mic_none_rounded,
+                        title: 'Record a voice note',
+                        subtitle: 'Get it out of your head',
+                      ),
+                      const _CaptureChoice(
+                        icon: Icons.image_outlined,
+                        title: 'Add an image',
+                        subtitle: 'A screenshot, note, or document',
+                      ),
+                      const SizedBox(height: 18),
                       SizedBox(
                         width: double.infinity,
-                        child: FilledButton.icon(
+                        child: FilledButton(
                           onPressed: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => const CaptureScreen()),
+                            MaterialPageRoute(
+                              builder: (_) => const CaptureScreen(),
+                            ),
                           ),
-                          icon: const Icon(Icons.add_rounded),
-                          label: const Text('INITIALIZE CAPTURE'),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Start capturing'),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_forward_rounded, size: 18),
+                            ],
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 14),
+                      const SizedBox(height: 16),
                       const Center(
                         child: Text(
-                          'CAPTURE  /  UNDERSTAND  /  ACT',
-                          textAlign: TextAlign.center,
+                          'LESS NOISE. MORE INTENTION.',
                           style: TextStyle(
                             color: ActifyTheme.textMuted,
                             fontSize: 9,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 2,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1.6,
                           ),
                         ),
                       ),
@@ -170,186 +158,101 @@ class _BrandMark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
-      height: 30,
+      width: 28,
+      height: 28,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [ActifyTheme.neonCyan, ActifyTheme.electricBlue],
-        ),
-        borderRadius: BorderRadius.circular(9),
-        boxShadow: [
-          BoxShadow(
-            color: ActifyTheme.neonCyan.withValues(alpha: 0.20),
-            blurRadius: 16,
-          ),
-        ],
+        color: ActifyTheme.accent,
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: const Icon(Icons.bolt_rounded, color: ActifyTheme.background, size: 20),
+      child: const Icon(
+        Icons.bolt_rounded,
+        color: ActifyTheme.background,
+        size: 19,
+      ),
     );
   }
 }
 
-class _SystemStatus extends StatelessWidget {
-  const _SystemStatus();
+class _StatusDot extends StatelessWidget {
+  const _StatusDot();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-      decoration: BoxDecoration(
-        color: ActifyTheme.neonCyan.withValues(alpha: 0.07),
-        border: Border.all(color: ActifyTheme.neonCyan.withValues(alpha: 0.28)),
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _TinyStatusDot(),
-          SizedBox(width: 7),
-          Text(
-            'READY',
-            style: TextStyle(
-              color: ActifyTheme.neonCyan,
-              fontSize: 9,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1.2,
-            ),
-          ),
-        ],
+      width: 6,
+      height: 6,
+      decoration: const BoxDecoration(
+        color: ActifyTheme.accent,
+        shape: BoxShape.circle,
       ),
     );
   }
 }
 
-class _Eyebrow extends StatelessWidget {
-  final String label;
-  const _Eyebrow({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          width: 22,
-          height: 2,
-          decoration: BoxDecoration(
-            color: ActifyTheme.neonCyan,
-            borderRadius: BorderRadius.circular(3),
-          ),
-        ),
-        const SizedBox(width: 9),
-        Flexible(
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: ActifyTheme.neonCyan,
-              fontSize: 10,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 1.5,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _MissionPanel extends StatelessWidget {
-  const _MissionPanel();
+class _FocusCard extends StatelessWidget {
+  const _FocusCard();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF132B3B),
-            Color(0xFF101827),
-            Color(0xFF17132D),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: ActifyTheme.neonCyan.withValues(alpha: 0.33)),
-        boxShadow: [
-          BoxShadow(
-            color: ActifyTheme.neonCyan.withValues(alpha: 0.06),
-            blurRadius: 28,
-            spreadRadius: 1,
-          ),
-        ],
+        color: ActifyTheme.surface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: ActifyTheme.outline),
       ),
-      child: Stack(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Positioned(
-            right: -10,
-            top: -18,
-            child: Icon(
-              Icons.blur_circular,
-              size: 132,
-              color: ActifyTheme.neonCyan.withValues(alpha: 0.045),
+          const Row(
+            children: [
+              Icon(Icons.center_focus_strong_rounded,
+                  color: ActifyTheme.accent, size: 18),
+              SizedBox(width: 8),
+              Text(
+                'YOUR FOCUS',
+                style: TextStyle(
+                  color: ActifyTheme.textMuted,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.3,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'One thing at a time.',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontSize: 21,
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          const SizedBox(height: 8),
+          Text(
+            'Your next step will feel clearer once you capture what is competing for your attention.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 22),
+          Container(height: 1, color: ActifyTheme.outline),
+          const SizedBox(height: 16),
+          const Row(
             children: [
-              const Row(
-                children: [
-                  Icon(Icons.radar_rounded, color: ActifyTheme.neonCyan, size: 19),
-                  SizedBox(width: 8),
-                  Text(
-                    'NEXT BEST ACTION',
-                    style: TextStyle(
-                      color: ActifyTheme.neonCyan,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 10,
-                      letterSpacing: 1.5,
-                    ),
+              Icon(Icons.check_circle_outline_rounded,
+                  color: ActifyTheme.accent, size: 17),
+              SizedBox(width: 9),
+              Expanded(
+                child: Text(
+                  'Capture  ·  Clarify  ·  Act',
+                  style: TextStyle(
+                    color: ActifyTheme.textPrimary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
                   ),
-                  Spacer(),
-                  _LiveTag(),
-                ],
-              ),
-              const SizedBox(height: 26),
-              Container(
-                width: 52,
-                height: 52,
-                decoration: BoxDecoration(
-                  color: ActifyTheme.background.withValues(alpha: 0.7),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: ActifyTheme.outline),
-                ),
-                child: const Icon(
-                  Icons.center_focus_strong_rounded,
-                  color: ActifyTheme.neonCyan,
-                  size: 27,
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(
-                'Your focus starts here.',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 21),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Add a task, note, or screenshot. Turn it into a clear next step.',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 20),
-              const Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  _SignalChip(icon: Icons.bolt_rounded, label: 'PRIORITIZE'),
-                  _SignalChip(icon: Icons.route_rounded, label: 'PLAN'),
-                  _SignalChip(icon: Icons.track_changes_rounded, label: 'FOCUS'),
-                ],
-              ),
+              Icon(Icons.arrow_outward_rounded,
+                  color: ActifyTheme.textMuted, size: 17),
             ],
           ),
         ],
@@ -358,158 +261,48 @@ class _MissionPanel extends StatelessWidget {
   }
 }
 
-class _LiveTag extends StatelessWidget {
-  const _LiveTag();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-      decoration: BoxDecoration(
-        color: ActifyTheme.neonViolet.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(7),
-        border: Border.all(color: ActifyTheme.neonViolet.withValues(alpha: 0.25)),
-      ),
-      child: const Text(
-        'AI READY',
-        style: TextStyle(
-          color: ActifyTheme.neonViolet,
-          fontSize: 8,
-          fontWeight: FontWeight.w900,
-          letterSpacing: 0.8,
-        ),
-      ),
-    );
-  }
-}
-
-class _SignalChip extends StatelessWidget {
+class _CaptureChoice extends StatelessWidget {
   final IconData icon;
-  final String label;
-  const _SignalChip({required this.icon, required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: ActifyTheme.background.withValues(alpha: 0.54),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: ActifyTheme.outline),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 13, color: ActifyTheme.neonCyan),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 9,
-              fontWeight: FontWeight.w900,
-              letterSpacing: 0.7,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SectionHeading extends StatelessWidget {
   final String title;
   final String subtitle;
-  const _SectionHeading({required this.title, required this.subtitle});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            color: ActifyTheme.textPrimary,
-            fontWeight: FontWeight.w900,
-            fontSize: 11,
-            letterSpacing: 1.4,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          subtitle,
-          style: const TextStyle(color: ActifyTheme.textMuted, fontSize: 11),
-        ),
-      ],
-    );
-  }
-}
-
-class _TinyStatusDot extends StatelessWidget {
-  const _TinyStatusDot();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 6,
-      height: 6,
-      decoration: BoxDecoration(
-        color: ActifyTheme.neonCyan,
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: ActifyTheme.neonCyan.withValues(alpha: 0.45),
-            blurRadius: 7,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CaptureOption extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String detail;
-  const _CaptureOption({
+  const _CaptureChoice({
     required this.icon,
-    required this.label,
-    required this.detail,
+    required this.title,
+    required this.subtitle,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      margin: const EdgeInsets.only(bottom: 9),
       decoration: BoxDecoration(
         color: ActifyTheme.surface,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(13),
         border: Border.all(color: ActifyTheme.outline),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 38,
-            height: 38,
-            decoration: BoxDecoration(
-              color: ActifyTheme.electricBlue.withValues(alpha: 0.09),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: ActifyTheme.electricBlue.withValues(alpha: 0.18)),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+        leading: Icon(icon, size: 22, color: ActifyTheme.textMuted),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+        ),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Text(
+            subtitle,
+            style: const TextStyle(
+              color: ActifyTheme.textMuted,
+              fontSize: 11,
             ),
-            child: Icon(icon, size: 20, color: ActifyTheme.electricBlue),
           ),
-          const SizedBox(height: 12),
-          Text(
-            label,
-            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            detail,
-            style: const TextStyle(color: ActifyTheme.textMuted, fontSize: 10),
-          ),
-        ],
+        ),
+        trailing: const Icon(
+          Icons.arrow_forward_rounded,
+          size: 17,
+          color: ActifyTheme.textMuted,
+        ),
       ),
     );
   }
