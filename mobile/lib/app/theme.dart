@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// ACTIFY's dark cyber-inspired design system.
+/// ACTIFY's cyber command-center design system.
 class ActifyTheme {
   static const Color background = Color(0xFF070A12);
   static const Color surface = Color(0xFF101827);
@@ -11,19 +11,25 @@ class ActifyTheme {
   static const Color textPrimary = Color(0xFFEAF2FF);
   static const Color textMuted = Color(0xFF8D9BB4);
   static const Color outline = Color(0xFF26344A);
+  static const Color danger = Color(0xFFFF6B8A);
 
   static ThemeData dark() {
-    final scheme = ColorScheme.fromSeed(
-      seedColor: neonCyan,
-      brightness: Brightness.dark,
-      surface: surface,
-    ).copyWith(
+    const scheme = ColorScheme.dark(
       primary: neonCyan,
+      onPrimary: background,
       secondary: electricBlue,
+      onSecondary: background,
       tertiary: neonViolet,
       surface: surface,
       onSurface: textPrimary,
+      error: danger,
+      onError: background,
       outline: outline,
+    );
+
+    final roundedBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(14),
+      borderSide: const BorderSide(color: outline),
     );
 
     return ThemeData(
@@ -33,6 +39,8 @@ class ActifyTheme {
       scaffoldBackgroundColor: background,
       canvasColor: background,
       dividerColor: outline,
+      splashColor: neonCyan.withValues(alpha: 0.08),
+      highlightColor: neonCyan.withValues(alpha: 0.04),
       appBarTheme: const AppBarTheme(
         backgroundColor: background,
         foregroundColor: textPrimary,
@@ -41,16 +49,16 @@ class ActifyTheme {
         centerTitle: false,
         titleTextStyle: TextStyle(
           color: textPrimary,
-          fontSize: 20,
-          fontWeight: FontWeight.w800,
-          letterSpacing: 1.4,
+          fontSize: 19,
+          fontWeight: FontWeight.w900,
+          letterSpacing: 1.8,
         ),
       ),
       cardTheme: CardThemeData(
         color: surface,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        margin: const EdgeInsets.only(bottom: 14),
+        margin: const EdgeInsets.only(bottom: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
           side: const BorderSide(color: outline),
@@ -61,12 +69,13 @@ class ActifyTheme {
           backgroundColor: neonCyan,
           foregroundColor: background,
           minimumSize: const Size(48, 54),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
           textStyle: const TextStyle(
-            fontWeight: FontWeight.w800,
-            letterSpacing: 0.3,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.8,
           ),
         ),
       ),
@@ -85,16 +94,9 @@ class ActifyTheme {
         fillColor: surfaceRaised,
         hintStyle: const TextStyle(color: textMuted),
         labelStyle: const TextStyle(color: textMuted),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: outline),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: outline),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+        border: roundedBorder,
+        enabledBorder: roundedBorder,
+        focusedBorder: roundedBorder.copyWith(
           borderSide: const BorderSide(color: neonCyan, width: 1.5),
         ),
       ),
@@ -102,21 +104,26 @@ class ActifyTheme {
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
           color: textPrimary,
-          fontSize: 30,
-          fontWeight: FontWeight.w800,
-          letterSpacing: -0.7,
+          fontSize: 32,
+          height: 1.05,
+          fontWeight: FontWeight.w900,
+          letterSpacing: -1.1,
         ),
         headlineSmall: TextStyle(
           color: textPrimary,
-          fontSize: 23,
+          fontSize: 24,
           fontWeight: FontWeight.w800,
-          letterSpacing: -0.3,
+          letterSpacing: -0.5,
         ),
-        titleLarge: TextStyle(color: textPrimary, fontWeight: FontWeight.w700),
+        titleLarge: TextStyle(
+          color: textPrimary,
+          fontWeight: FontWeight.w800,
+          letterSpacing: -0.2,
+        ),
         titleMedium: TextStyle(color: textPrimary, fontWeight: FontWeight.w700),
         bodyLarge: TextStyle(color: textPrimary, height: 1.45),
         bodyMedium: TextStyle(color: textMuted, height: 1.45),
-        labelLarge: TextStyle(fontWeight: FontWeight.w800, letterSpacing: 0.6),
+        labelLarge: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 0.7),
       ),
     );
   }
