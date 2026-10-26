@@ -13,40 +13,30 @@ class NextActionCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF14283A), ActifyTheme.surface, Color(0xFF15132A)],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: ActifyTheme.neonCyan.withValues(alpha: 0.4)),
-        boxShadow: [
-          BoxShadow(
-            color: ActifyTheme.neonCyan.withValues(alpha: 0.06),
-            blurRadius: 24,
-            spreadRadius: 1,
-          ),
-        ],
+        color: ActifyTheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: ActifyTheme.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
-              Icon(Icons.radar, color: ActifyTheme.neonCyan, size: 20),
+              Icon(Icons.center_focus_strong_rounded,
+                  color: ActifyTheme.accent, size: 18),
               SizedBox(width: 8),
               Text(
                 'NEXT BEST ACTION',
                 style: TextStyle(
-                  color: ActifyTheme.neonCyan,
+                  color: ActifyTheme.textMuted,
                   fontWeight: FontWeight.w800,
-                  fontSize: 11,
-                  letterSpacing: 1.5,
+                  fontSize: 10,
+                  letterSpacing: 1.2,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 18),
+          const SizedBox(height: 20),
           Text(title, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 8),
           Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
