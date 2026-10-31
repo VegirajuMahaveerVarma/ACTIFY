@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../capture/capture_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<_HomeTask> _tasks = [
+    _HomeTask(title: 'Review today’s priorities', done: false),
+    _HomeTask(title: 'Make progress on one important task', done: false),
+    _HomeTask(title: 'Take a short reset break', done: true),
+  ];
+
+  int get _completedTasks => _tasks.where((task) => task.done).length;
+
+  @override
   Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final dateLabel = _weekday(now.weekday).toUpperCase();
+
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -17,12 +33,12 @@ class HomeScreen extends StatelessWidget {
             Text('actify'),
           ],
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 _StatusDot(),
                 SizedBox(width: 7),
                 Text(
@@ -44,7 +60,7 @@ class HomeScreen extends StatelessWidget {
           builder: (context, constraints) {
             final horizontal = constraints.maxWidth > 650 ? 32.0 : 20.0;
             return SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(horizontal, 20, horizontal, 28),
+              padding: EdgeInsets.fromLTRB(horizontal, 20, horizontal, 32),
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 680),
@@ -52,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'MONDAY, YOUR WAY',
+                        '$dateLabel, YOUR WAY',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: ActifyTheme.textMuted,
                           fontWeight: FontWeight.w700,
@@ -74,8 +90,13 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
-                      const _FocusCard(),
+                      const SizedBox(height: 28),
+                      _ProgressCard(
+                        completed: _completedTasks,
+                        total: _tasks.length,
+                        tasks: _tasks,
+                        onToggle: _toggleTask,
+                      ),
                       const SizedBox(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +149,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
                       const Center(
                         child: Text(
                           'LESS NOISE. MORE INTENTION.',
@@ -150,6 +171,30 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _toggleTask(int index) {
+    setState(() => _tasks[index].done = !_tasks[index].done);
+  }
+
+  String _weekday(int weekday) {
+    const days = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ];
+    return days[weekday - 1];
+  }
+}
+
+class _HomeTask {
+  final String title;
+  bool done;
+
+  _HomeTask({required this.title, required this.done});
 }
 
 class _BrandMark extends StatelessWidget {
@@ -189,14 +234,26 @@ class _StatusDot extends StatelessWidget {
   }
 }
 
-class _FocusCard extends StatelessWidget {
-  const _FocusCard();
+class _ProgressCard extends StatelessWidget {
+  final int completed;
+  final int total;
+  final List<_HomeTask> tasks;
+  final ValueChanged<int> onToggle;
+
+  const _ProgressCard({
+    required this.completed,
+    required this.total,
+    required this.tasks,
+    required this.onToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final progress = total == 0 ? 0.0 : completed / total;
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(22),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: ActifyTheme.surface,
         borderRadius: BorderRadius.circular(18),
@@ -205,56 +262,86 @@ class _FocusCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.center_focus_strong_rounded,
-                  color: ActifyTheme.accent, size: 18),
-              SizedBox(width: 8),
+              const Icon(
+                Icons.center_focus_strong_rounded,
+                color: ActifyTheme.accent,
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              const Expanded(
+                child: Text(
+                  'TODAY’S FOCUS',
+                  style: TextStyle(
+                    color: ActifyTheme.textMuted,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.3,
+                  ),
+                ),
+              ),
               Text(
-                'YOUR FOCUS',
-                style: TextStyle(
-                  color: ActifyTheme.textMuted,
+                '$completed / $total DONE',
+                style: const TextStyle(
+                  color: ActifyTheme.accent,
                   fontSize: 10,
                   fontWeight: FontWeight.w800,
-                  letterSpacing: 1.3,
+                  letterSpacing: 0.7,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 18),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(99),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 5,
+              backgroundColor: ActifyTheme.surfaceRaised,
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                ActifyTheme.accent,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
           Text(
-            'One thing at a time.',
+            completed == total ? 'You showed up today.' : 'One thing at a time.',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontSize: 21,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           Text(
-            'Your next step will feel clearer once you capture what is competing for your attention.',
+            completed == total
+                ? 'Your list is clear. Take a moment to reset.'
+                : 'Small steps make a meaningful day.',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          const SizedBox(height: 22),
-          Container(height: 1, color: ActifyTheme.outline),
-          const SizedBox(height: 16),
-          const Row(
-            children: [
-              Icon(Icons.check_circle_outline_rounded,
-                  color: ActifyTheme.accent, size: 17),
-              SizedBox(width: 9),
-              Expanded(
-                child: Text(
-                  'Capture  ·  Clarify  ·  Act',
-                  style: TextStyle(
-                    color: ActifyTheme.textPrimary,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                  ),
+          const SizedBox(height: 14),
+          ...List.generate(tasks.length, (index) {
+            final task = tasks[index];
+            return CheckboxListTile(
+              value: task.done,
+              onChanged: (_) => onToggle(index),
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              activeColor: ActifyTheme.accent,
+              checkColor: ActifyTheme.background,
+              title: Text(
+                task.title,
+                style: TextStyle(
+                  color: task.done
+                      ? ActifyTheme.textMuted
+                      : ActifyTheme.textPrimary,
+                  fontSize: 12,
+                  decoration: task.done ? TextDecoration.lineThrough : null,
+                  decorationColor: ActifyTheme.textMuted,
                 ),
               ),
-              Icon(Icons.arrow_outward_rounded,
-                  color: ActifyTheme.textMuted, size: 17),
-            ],
-          ),
+            );
+          }),
         ],
       ),
     );
