@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-  <strong>Less noise. More intention.</strong><br/>
-  An AI-powered, phone-first action-intelligence project with a minimalist dark interface.
+  <strong>Turn everyday information into meaningful action.</strong><br/>
+  An AI-powered, mobile-first productivity project designed to help people organize information, manage priorities, and take the next step with confidence.
 </p>
 
 <p align="center">
@@ -16,23 +16,23 @@
   <img alt="Status" src="https://img.shields.io/badge/status-early%20development-D6F36A?labelColor=17191C">
 </p>
 
-ACTIFY explores a simple idea: useful information is scattered across screenshots, voice notes, documents, and messages, while the next action is often unclear. The goal is to turn those inputs into structured tasks, sensible priorities, schedules, and a **Next Best Action**.
+ACTIFY is built around a common challenge: important information often gets lost across screenshots, voice notes, documents, and messages. Finding what matters and deciding what to do next can take more time than the task itself. ACTIFY aims to bring that information together and turn it into organized tasks, clear priorities, practical schedules, and a **Next Best Action**.
 
-> **Project status:** early development. The repository contains a Flutter mobile foundation, a FastAPI service, AI prompt/schema definitions, and a database schema. Not every item in the product vision is implemented or production-ready yet.
+> **Project status:** early development. The repository includes the initial Flutter mobile application, a FastAPI backend, AI prompt and schema definitions, and a database schema. Some features are still being developed and have not yet been validated for production use.
 
 ## Design
 
-ACTIFY uses a quiet, minimalist dark interface: charcoal surfaces, soft contrast, generous spacing, clear typography, and a single muted-lime accent. The UI is designed to keep attention on tasks and decisions rather than decoration.
+ACTIFY follows a clean, minimalist visual style that keeps the experience focused. Its dark interface combines charcoal backgrounds, balanced contrast, readable typography, comfortable spacing, and a subtle lime accent. Every design choice aims to make information easier to scan and actions easier to identify.
 
 ## Product loop
 
 **CAPTURE → UNDERSTAND → PRIORITIZE → PLAN → ACT → ADAPT**
 
-1. Capture information from supported inputs.
-2. Extract task details into a predictable structure.
-3. Apply deterministic rules for priority and deadlines.
-4. Help the user decide what to do next.
-5. Revisit the plan as tasks and deadlines change.
+1. Bring information together from supported input sources.
+2. Identify important details and convert them into structured tasks.
+3. Organize tasks using priorities, deadlines, and application rules.
+4. Suggest a useful next action based on the available task information.
+5. Update plans as priorities, deadlines, and task progress change.
 
 ## Repository layout
 
@@ -61,14 +61,14 @@ ACTIFY/
 
 ### Backend
 
-From the repository root:
+From the repository root, create a Python virtual environment:
 
 ```bash
 cd backend
 python -m venv .venv
 ```
 
-Activate the environment, then install dependencies and start the API:
+Activate the environment, install the required packages, and launch the API:
 
 ```powershell
 # Windows PowerShell
@@ -77,15 +77,15 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-On macOS or Linux, activate with `source .venv/bin/activate` instead.
+On macOS or Linux, activate the environment using `source .venv/bin/activate`.
 
-The API health endpoint is available at `http://127.0.0.1:8000/health`. Interactive API docs are at `http://127.0.0.1:8000/docs`.
+Once the server is running, visit `http://127.0.0.1:8000/health` to check its status or open `http://127.0.0.1:8000/docs` to explore the API documentation.
 
-Copy `backend/.env.example` to `backend/.env` and fill in credentials only when needed. Never commit real API keys or secrets.
+Copy `backend/.env.example` to `backend/.env` and add the required credentials when needed. Keep private keys and secrets out of version control.
 
 ### Mobile app
 
-In a second terminal:
+Open a second terminal and run:
 
 ```bash
 cd mobile
@@ -95,13 +95,13 @@ flutter test
 flutter run
 ```
 
-If connecting the app to a local backend, configure the API base URL for the target device. Android emulators typically reach the host machine through `10.0.2.2`; a physical device needs the computer's reachable LAN address.
+To connect the mobile app to a locally running backend, set the API base URL for your device. Android emulators generally use `10.0.2.2` to access the host machine, while physical devices need the computer's reachable local network address.
 
 ## Quality checks
 
-The GitHub Actions workflow runs backend Python tests and Flutter static analysis/tests on pushes and pull requests. A green workflow is a useful baseline, not proof that every device, external API, or production deployment has been validated.
+The GitHub Actions workflow provides automated checks for backend tests and Flutter analysis and tests on pushes and pull requests. These checks help catch issues early, but do not replace testing across devices, external services, and production environments.
 
-Run backend tests from the repository root:
+Run the backend test suite from the repository root:
 
 ```bash
 python -m pip install -r backend/requirements.txt pytest
@@ -110,22 +110,22 @@ python -m pytest tests/backend tests/ai
 
 ## Design principle
 
-Use AI for language understanding and extraction; use deterministic application logic for priority scoring, scheduling, conflict handling, task state, and replanning. This separation makes the behavior easier to test and explain.
+ACTIFY aims to combine the strengths of AI with reliable application logic. AI is used to understand information and extract useful details, while predictable application rules handle priority scoring, scheduling, conflicts, task status, and replanning. This approach keeps decisions consistent, testable, and easier to understand.
 
 ## Roadmap
 
-- [ ] Validate task extraction against realistic screenshots, notes, and documents.
-- [ ] Add meaningful unit and API contract tests for task and schedule behavior.
-- [ ] Implement durable task persistence and verify sync behavior.
-- [ ] Complete capture flows, including OCR and input error states.
-- [ ] Add setup instructions and screenshots from a verified app run.
-- [ ] Validate secrets handling, API configuration, and deployment before describing the app as production-ready.
+- [ ] Test task extraction using real-world screenshots, notes, and documents.
+- [ ] Expand unit tests and API contract tests for task management and scheduling.
+- [ ] Implement reliable task storage and validate synchronization.
+- [ ] Improve information capture, including OCR and input error handling.
+- [ ] Add setup guidance and screenshots from a verified application run.
+- [ ] Review secret management, API configuration, and deployment readiness.
 
-The visual theme is a presentation choice; it does not imply that every planned feature is implemented.
+The current design represents the intended product experience; it does not mean every planned capability is already available.
 
 ## Contributing
 
-Issues and focused pull requests are welcome. Please include the problem being solved, steps to reproduce it where relevant, and the checks you ran.
+Contributions, suggestions, and bug reports are welcome. When opening an issue or pull request, describe the proposed change, include reproduction steps when applicable, and mention the checks you performed.
 
 ## Team
 
