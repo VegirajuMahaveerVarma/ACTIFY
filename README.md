@@ -1,5 +1,5 @@
 # ACTIFY
-Offline Intelligence System
+Offline Intelligence System. 
 
 <p align="center">
   <img src="https://img.shields.io/badge/ACTIFY-FOCUS%20INTO%20ACTION-D6F36A?style=for-the-badge&labelColor=0E0F11" alt="ACTIFY">
