@@ -131,16 +131,49 @@ ACTIFY is intended to use model-assisted interpretation without delegating every
 
 This separation establishes a design boundary between **interpretive inference** and **stateful execution policy**. It is a guiding architectural principle; the degree to which it is enforced should be evaluated against the implemented code and tests.
 
-## 8. Forward work
+## 8. Product capability roadmap
 
-- [ ] Evaluate extraction quality against representative screenshots, notes, and documents.
-- [ ] Extend unit and API-contract coverage for task lifecycle and scheduling behavior.
-- [ ] Implement and validate durable task persistence and synchronization semantics.
-- [ ] Strengthen capture pipelines, including OCR behavior and malformed-input handling.
-- [ ] Add setup documentation and screenshots from a verified application execution.
-- [ ] Review configuration isolation, secret handling, and deployment prerequisites.
+The following items describe candidate capabilities for future development. They are roadmap proposals, not statements that the functionality is currently available.
 
-The roadmap records intended work. It should not be read as a feature-availability statement.
+### 8.1 Intelligent capture and understanding
+
+- [ ] **Multi-source capture inbox** — collect screenshots, voice notes, copied text, PDFs, and document attachments in one intake queue.
+- [ ] **OCR and document parsing** — extract readable text from images and PDFs while retaining source references for review.
+- [ ] **Voice-to-task conversion** — transcribe spoken thoughts and identify actionable items, dates, and named entities.
+- [ ] **Context-aware extraction** — recognize task descriptions, deadlines, people, locations, and supporting context from unstructured input.
+- [ ] **Duplicate detection** — identify repeated or near-identical tasks across multiple capture sources.
+- [ ] **Human review before creation** — allow users to correct extracted fields before they become saved tasks.
+
+### 8.2 Task intelligence and execution
+
+- [ ] **Explainable priority engine** — calculate task priority using urgency, importance, effort, deadline proximity, and user-defined weighting; show why a task received its score.
+- [ ] **Next Best Action engine** — recommend one practical next step using task context, availability, and current progress.
+- [ ] **Smart scheduling** — propose time blocks while respecting deadlines, estimated duration, working hours, and existing commitments.
+- [ ] **Deadline and reminder system** — support due-date alerts, configurable reminders, and overdue-task handling.
+- [ ] **Recurring tasks and subtasks** — represent repeatable routines, dependencies, checklists, and multi-step work.
+- [ ] **Projects, tags, and filters** — group related tasks and provide focused views such as Today, Upcoming, Waiting, and Completed.
+- [ ] **Automatic replanning** — revise suggested task order when deadlines change or planned work is not completed.
+- [ ] **Progress insights** — summarize completion trends, postponed tasks, workload distribution, and recurring bottlenecks.
+
+### 8.3 Personalization and platform foundations
+
+- [ ] **Offline-first task access** — allow core task viewing and editing without a network connection.
+- [ ] **Reliable synchronization** — reconcile local and remote changes with explicit conflict-handling rules.
+- [ ] **Secure user accounts** — add authentication, user-scoped data access, and session management.
+- [ ] **Privacy and data controls** — provide clear controls for stored content, source attachments, export, and deletion.
+- [ ] **Calendar integration** — explore importing availability and exporting confirmed task schedules to supported calendar providers.
+- [ ] **Configurable AI providers** — isolate model-provider configuration so extraction workflows can be evaluated across supported models.
+- [ ] **Responsive mobile experience** — refine loading, empty, error, accessibility, and small-screen interaction states.
+
+### 8.4 Reliability and engineering maturity
+
+- [ ] **Extraction evaluation set** — test representative screenshots, voice notes, messages, and documents against expected structured outputs.
+- [ ] **AI output validation** — reject malformed or incomplete model responses and provide safe recovery paths.
+- [ ] **End-to-end workflow tests** — verify capture-to-task creation, persistence, scheduling, completion, and replanning.
+- [ ] **Observability** — add structured logs and actionable diagnostics without exposing private user content or credentials.
+- [ ] **Performance and resilience checks** — evaluate large attachments, slow networks, provider failures, and retry behavior.
+- [ ] **Deployment documentation** — document environment configuration, database setup, migrations, backups, and release procedures.
+- [ ] **Verified product demonstrations** — add screenshots or short recordings only after the corresponding workflows run successfully.
 
 ## 9. Contribution protocol
 
