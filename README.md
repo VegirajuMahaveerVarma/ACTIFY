@@ -1,108 +1,192 @@
-# ACTIFY
-Offline Intelligence System. 
+# ACTIFY — Focus Into Action
 
 <p align="center">
-  <img src="https://img.shields.io/badge/ACTIFY-FOCUS%20INTO%20ACTION-D6F36A?style=for-the-badge&labelColor=0E0F11" alt="ACTIFY">
+  <img src="https://img.shields.io/badge/ACTIFY-FOCUS%20INTO%20ACTION-D6F36A?style=for-the-badge&labelColor=0E0F11" alt="ACTIFY — Focus Into Action">
 </p>
 
 <p align="center">
-  <strong>A context-mediated execution layer for the transition from informational entropy to actionable state.</strong><br/>
-  An AI-assisted, mobile-first system for consolidating heterogeneous inputs, deriving task-oriented representations, and supporting priority-aware execution.
+  <strong>Turn scattered information into clear, actionable work.</strong><br>
+  An AI-assisted, mobile-first productivity system designed to capture context, organize tasks, and help people decide what to do next.
 </p>
 
 <p align="center">
-  <a href="https://github.com/VegirajuMahaveerVarma/ACTIFY/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/VegirajuMahaveerVarma/ACTIFY/actions/workflows/ci.yml/badge.svg"></a>
-  <img alt="Flutter" src="https://img.shields.io/badge/mobile-Flutter%20%2F%20Dart-9AA0A6?logo=flutter&logoColor=white&labelColor=17191C">
-  <img alt="Backend" src="https://img.shields.io/badge/backend-FastAPI-9AA0A6?logo=fastapi&logoColor=white&labelColor=17191C">
-  <img alt="Status" src="https://img.shields.io/badge/status-early%20development-D6F36A?labelColor=17191C">
+  <a href="https://github.com/VegirajuMahaveerVarma/ACTIFY/actions/workflows/ci.yml"><img src="https://github.com/VegirajuMahaveerVarma/ACTIFY/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/badge/Client-Flutter-02569B?logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Language-Python%20%7C%20Dart-3776AB?logo=python&logoColor=white" alt="Python and Dart">
+  <img src="https://img.shields.io/badge/Stage-Early%20Development-D6F36A?labelColor=17191C" alt="Early development">
 </p>
 
-## 0. System premise
+---
 
-ACTIFY explores the conversion of fragmented personal information into a normalized, execution-oriented representation. Its input domain may include screenshots, voice-derived text, documents, and message content; its intended output domain comprises structured tasks, temporal constraints, relative priorities, schedule candidates, and a context-dependent **Next Best Action**.
+## What is ACTIFY?
 
-The central problem is not merely information storage. It is the discontinuity between acquisition, interpretation, prioritization, and subsequent execution. ACTIFY is intended to reduce that discontinuity through a coordinated mobile/backend workflow in which extracted context can be transformed into actionable units.
+Important tasks are often buried inside screenshots, messages, documents, voice notes, and passing thoughts. ACTIFY is being developed to bring those inputs into one place and turn useful information into structured tasks.
 
-> **Implementation boundary:** early development. The repository currently contains an initial Flutter application, a FastAPI service, AI prompt/schema definitions, and a database schema. The presence of a planned component or interface should not be interpreted as evidence of production completeness, operational guarantees, or validated end-to-end behavior.
+The goal is simple: **spend less time organizing information and more time taking meaningful action.**
 
-## 1. Interaction philosophy
+ACTIFY explores an AI-assisted workflow that can identify task details and context, while predictable application logic handles prioritization, scheduling constraints, and task-state changes.
 
-The interface adopts a low-noise visual grammar: dark tonal surfaces, controlled contrast, typographic hierarchy, and a restrained lime accent. The objective is to reduce visual competition while preserving sufficient affordance distinction for high-frequency task interactions.
+> **Project status:** ACTIFY is in early development. This repository contains an initial Flutter client, a FastAPI service, AI prompt/schema definitions, a database schema, and initial tests. Roadmap items below are planned ideas—not claims of completed functionality.
 
-The visual system is deliberately subordinate to the information hierarchy. Surface treatment, spacing, and emphasis are intended to communicate state and relevance rather than function as independent decoration.
-
-## 2. Operational lifecycle
-
-`INGEST → NORMALIZE → INTERPRET → PRIORITIZE → SCHEDULE → EXECUTE → RECONCILE`
-
-| Phase | Intended responsibility |
-| --- | --- |
-| Ingest | Acquire information from supported user-facing input channels. |
-| Normalize | Convert source-specific payloads into processable representations. |
-| Interpret | Extract task candidates, entities, deadlines, and contextual signals. |
-| Prioritize | Apply task attributes and application-level decision rules. |
-| Schedule | Derive candidate execution sequences from available constraints. |
-| Execute | Surface a contextually relevant next action to the user. |
-| Reconcile | Incorporate task-state changes into subsequent planning cycles. |
-
-This lifecycle is a conceptual model of the intended product behavior, not a claim that every phase is fully implemented.
-
-## 3. Structural topology
+## The workflow
 
 ```text
-ACTIFY/
-├── mobile/       # Flutter presentation and interaction surface
-├── backend/      # FastAPI application boundary
-├── ai/           # Prompt contracts and structured-output definitions
-├── database/     # Relational persistence schema
-├── docs/         # Architecture, API and demonstration material
-└── tests/        # Initial backend and AI contract validation
+  CAPTURE
+     |
+     v
+  UNDERSTAND  --->  REVIEW & CORRECT
+     |                    |
+     v                    v
+  ORGANIZE  ------->  PRIORITIZE
+                         |
+                         v
+                      SCHEDULE
+                         |
+                         v
+                  NEXT BEST ACTION
+                         |
+                         v
+                      EXECUTE
+                         |
+                         v
+                  UPDATE & REPLAN
 ```
 
-The repository is organized around a client/service separation. The mobile layer owns presentation and user interaction; the backend exposes service capabilities; AI-related definitions describe interpretation contracts; and the database directory captures the current persistence model.
-
-## 4. Technology substrate
-
-| Concern | Current technology |
+| Stage | Purpose |
 | --- | --- |
-| Client runtime | Flutter, Dart, Provider |
-| Input adapters | HTTP, image picker, speech-to-text |
-| Service boundary | Python, FastAPI, Pydantic |
-| Model integration | Gemini SDK and prompt/schema definitions |
-| Persistence integration | Supabase client and PostgreSQL-oriented schema |
-| Verification | pytest, Flutter analyzer and Flutter tests |
+| Capture | Bring supported information sources into a single intake flow. |
+| Understand | Extract possible tasks, dates, entities, and useful context. |
+| Review | Let the user verify and correct extracted information. |
+| Organize | Structure tasks and connect related work. |
+| Prioritize | Apply transparent, repeatable task-priority rules. |
+| Schedule | Suggest an execution order around time and deadline constraints. |
+| Execute | Highlight a useful next action. |
+| Update | Reflect progress and revise plans when circumstances change. |
 
-These entries describe the technologies represented in the repository, not necessarily fully integrated or production-hardened subsystems.
+## Product direction
 
-## 5. Local execution
+### 1. Intelligent capture
+- Screenshot, image, document, and copied-text intake.
+- Voice notes and speech-to-text task capture.
+- OCR and document text extraction.
+- Context extraction for task descriptions, dates, and entities.
+- Duplicate and near-duplicate detection.
+- Review extracted details before saving.
 
-### 5.1 Service initialization
+### 2. Task and time intelligence
+- Explainable priority scoring based on urgency, importance, effort, and deadlines.
+- A **Next Best Action** recommendation.
+- Smart scheduling with duration and availability constraints.
+- Reminders, recurring tasks, subtasks, and dependencies.
+- Project, tag, and focused task views.
+- Automatic replanning when priorities or plans change.
+- Progress summaries and workload insights.
 
-From the repository root, create an isolated Python environment:
+### 3. Personal productivity foundations
+- Offline-first access to core task information.
+- Reliable synchronization and conflict handling.
+- Secure accounts and user-scoped data.
+- Privacy controls, data export, and deletion.
+- Calendar integration exploration.
+- Configurable AI-provider integrations.
+- Accessible, responsive mobile interactions.
+
+### 4. Engineering and reliability
+- Structured AI output validation and recovery.
+- Evaluation examples for image, voice, and document extraction.
+- End-to-end tests for core workflows.
+- Useful diagnostics that avoid exposing private content.
+- Performance and resilience testing.
+- Deployment, migration, and backup documentation.
+
+## Architecture at a glance
+
+```text
+ACTIFY
+├── mobile/       Flutter client and interaction layer
+├── backend/      FastAPI service layer
+├── ai/           Prompt contracts and output schemas
+├── database/     Relational database schema
+├── docs/         Project and technical documentation
+└── tests/        Backend and AI contract tests
+```
+
+The intended separation of responsibilities is:
+
+- **Mobile client:** presentation, capture, and user interaction.
+- **Backend:** API boundary and application services.
+- **AI layer:** interpretation of unstructured information.
+- **Database:** persistence structures for application data.
+- **Tests:** checks for implemented behavior and cross-layer contracts.
+
+### Technology stack
+
+| Area | Technology represented in this repository |
+| --- | --- |
+| Mobile | Flutter, Dart, Provider |
+| Input | HTTP, image picker, speech-to-text |
+| Backend | Python, FastAPI, Pydantic |
+| AI integration | Gemini SDK, prompt and schema definitions |
+| Data | Supabase client, PostgreSQL-oriented schema |
+| Testing | pytest, Flutter analyzer, Flutter tests |
+| Automation | GitHub Actions |
+
+## Getting started
+
+### Prerequisites
+
+Install the tools required for the parts you want to run:
+
+- Python and pip
+- Flutter SDK and Dart
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/VegirajuMahaveerVarma/ACTIFY.git
+cd ACTIFY
+```
+
+### 2. Run the backend
+
+Create and activate a virtual environment:
 
 ```bash
 cd backend
 python -m venv .venv
 ```
 
-Activate the environment, install the declared dependencies, and start the ASGI application:
+Windows PowerShell:
 
 ```powershell
-# Windows PowerShell
 .venv\Scripts\Activate.ps1
+```
+
+macOS / Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies and start the API:
+
+```bash
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-On macOS or Linux, activate the environment with `source .venv/bin/activate`.
+When the service starts successfully:
 
-The service health endpoint is available at `http://127.0.0.1:8000/health`; the interactive API schema is exposed at `http://127.0.0.1:8000/docs`.
+- Health endpoint: http://127.0.0.1:8000/health
+- Interactive API documentation: http://127.0.0.1:8000/docs
 
-Where external integrations are required, copy `backend/.env.example` to `backend/.env` and populate the corresponding configuration values. Credentials, tokens, and private keys must remain outside version control.
+If integrations require environment variables, copy `backend/.env.example` to `backend/.env` and add the required values.
 
-### 5.2 Client initialization
+### 3. Run the mobile app
 
-In a separate terminal:
+Open another terminal:
 
 ```bash
 cd mobile
@@ -112,73 +196,71 @@ flutter test
 flutter run
 ```
 
-The client must resolve a backend base URL reachable from its execution environment. Android emulators typically address the host machine through `10.0.2.2`; physical devices require a reachable LAN address and compatible network configuration.
+Make sure the app's backend base URL points to an address reachable from the device. For a standard Android emulator, the host machine is commonly reachable at `10.0.2.2`; a physical device needs a reachable network address.
 
-## 6. Verification surface
+### 4. Run backend tests
 
-The GitHub Actions workflow defines automated checks for backend tests and Flutter analysis/tests on pushes and pull requests. These checks provide a bounded verification signal; they do not establish cross-device correctness, external-provider availability, security certification, or production readiness.
-
-Execute the current backend test paths from the repository root:
+From the repository root:
 
 ```bash
 python -m pip install -r backend/requirements.txt pytest
 python -m pytest tests/backend tests/ai
 ```
 
-## 7. Decision-boundary principle
+## Roadmap
 
-ACTIFY is intended to use model-assisted interpretation without delegating every consequential application decision to probabilistic output. Language-model functionality is positioned around semantic extraction and contextual understanding, while deterministic application logic is intended to govern repeatable operations such as priority scoring, scheduling constraints, conflict handling, task-state transitions, and replanning.
+The checklist is a forward-looking plan. Items should be checked off only after implementation and verification.
 
-This separation establishes a design boundary between **interpretive inference** and **stateful execution policy**. It is a guiding architectural principle; the degree to which it is enforced should be evaluated against the implemented code and tests.
+- [ ] Unified capture inbox for text, images, voice, and documents
+- [ ] OCR and document parsing with source references
+- [ ] Editable AI-extracted task drafts
+- [ ] Duplicate detection across capture sources
+- [ ] Explainable priority scoring
+- [ ] Next Best Action recommendations
+- [ ] Constraint-aware scheduling and replanning
+- [ ] Reminders, recurring tasks, subtasks, and dependencies
+- [ ] Projects, tags, search, and task filters
+- [ ] Offline task access and robust synchronization
+- [ ] Authentication and user-level data isolation
+- [ ] Privacy controls, export, and deletion
+- [ ] Calendar connectivity
+- [ ] AI extraction evaluation suite
+- [ ] End-to-end workflow and failure-recovery tests
+- [ ] Deployment, migration, and backup guides
 
-## 8. Product capability roadmap
+## Design principles
 
-The following items describe candidate capabilities for future development. They are roadmap proposals, not statements that the functionality is currently available.
+1. **Human-in-the-loop:** AI suggestions should be reviewable and correctable.
+2. **Explainable decisions:** users should understand why a task is prioritized.
+3. **Deterministic execution rules:** repeatable operations should be governed by application logic, not left entirely to model output.
+4. **Privacy by design:** avoid exposing credentials and unnecessary personal content.
+5. **Useful over noisy:** the interface should emphasize relevant information and the next practical action.
 
-### 8.1 Intelligent capture and understanding
+## Contributing
 
-- [ ] **Multi-source capture inbox** — collect screenshots, voice notes, copied text, PDFs, and document attachments in one intake queue.
-- [ ] **OCR and document parsing** — extract readable text from images and PDFs while retaining source references for review.
-- [ ] **Voice-to-task conversion** — transcribe spoken thoughts and identify actionable items, dates, and named entities.
-- [ ] **Context-aware extraction** — recognize task descriptions, deadlines, people, locations, and supporting context from unstructured input.
-- [ ] **Duplicate detection** — identify repeated or near-identical tasks across multiple capture sources.
-- [ ] **Human review before creation** — allow users to correct extracted fields before they become saved tasks.
+Contributions, suggestions, and constructive feedback are welcome.
 
-### 8.2 Task intelligence and execution
+1. Check existing issues before starting significant work.
+2. Create a focused branch for your change.
+3. Keep changes scoped to a clear problem or feature.
+4. Add or update tests when behavior changes.
+5. Update documentation when setup steps or interfaces change.
+6. Open a pull request with a concise explanation and verification details.
 
-- [ ] **Explainable priority engine** — calculate task priority using urgency, importance, effort, deadline proximity, and user-defined weighting; show why a task received its score.
-- [ ] **Next Best Action engine** — recommend one practical next step using task context, availability, and current progress.
-- [ ] **Smart scheduling** — propose time blocks while respecting deadlines, estimated duration, working hours, and existing commitments.
-- [ ] **Deadline and reminder system** — support due-date alerts, configurable reminders, and overdue-task handling.
-- [ ] **Recurring tasks and subtasks** — represent repeatable routines, dependencies, checklists, and multi-step work.
-- [ ] **Projects, tags, and filters** — group related tasks and provide focused views such as Today, Upcoming, Waiting, and Completed.
-- [ ] **Automatic replanning** — revise suggested task order when deadlines change or planned work is not completed.
-- [ ] **Progress insights** — summarize completion trends, postponed tasks, workload distribution, and recurring bottlenecks.
+For larger changes, open an issue first so the approach can be discussed.
 
-### 8.3 Personalization and platform foundations
+## Security
 
-- [ ] **Offline-first task access** — allow core task viewing and editing without a network connection.
-- [ ] **Reliable synchronization** — reconcile local and remote changes with explicit conflict-handling rules.
-- [ ] **Secure user accounts** — add authentication, user-scoped data access, and session management.
-- [ ] **Privacy and data controls** — provide clear controls for stored content, source attachments, export, and deletion.
-- [ ] **Calendar integration** — explore importing availability and exporting confirmed task schedules to supported calendar providers.
-- [ ] **Configurable AI providers** — isolate model-provider configuration so extraction workflows can be evaluated across supported models.
-- [ ] **Responsive mobile experience** — refine loading, empty, error, accessibility, and small-screen interaction states.
+- Never commit API keys, access tokens, passwords, or private configuration.
+- Keep local environment files out of version control.
+- Report suspected security issues privately to the repository owner rather than publishing sensitive details in an issue.
 
-### 8.4 Reliability and engineering maturity
+## Project identity
 
-- [ ] **Extraction evaluation set** — test representative screenshots, voice notes, messages, and documents against expected structured outputs.
-- [ ] **AI output validation** — reject malformed or incomplete model responses and provide safe recovery paths.
-- [ ] **End-to-end workflow tests** — verify capture-to-task creation, persistence, scheduling, completion, and replanning.
-- [ ] **Observability** — add structured logs and actionable diagnostics without exposing private user content or credentials.
-- [ ] **Performance and resilience checks** — evaluate large attachments, slow networks, provider failures, and retry behavior.
-- [ ] **Deployment documentation** — document environment configuration, database setup, migrations, backups, and release procedures.
-- [ ] **Verified product demonstrations** — add screenshots or short recordings only after the corresponding workflows run successfully.
+**Built by Quantum Coders**
 
-## 9. Contribution protocol
+---
 
-Issues and pull requests should identify the affected subsystem, describe the observed or proposed behavior, provide reproducible context where applicable, and enumerate the verification steps performed. Changes that affect cross-layer contracts should include corresponding updates to relevant tests or documentation.
-
-## 10. Project identity
-
-**Quantum Coders**
+<p align="center">
+  <strong>ACTIFY — Capture less chaos. Create more momentum.</strong>
+</p>
